@@ -1,0 +1,160 @@
+SQL SERVER as RDBMS
+
+
+
+DBMS----Database Management Systems--- 
+1)managing the data----(C-create,R-read,U-Update.D-Delete) & Concurrency Control& Security
+  
+
+RDBMS----- Relational Database Management Systems--- Dr.E.F.Codd---
+12 rules--Codds Rules
+6-8 Rules---Partial RDBMS
+SQL SERVER---- Full RDBMS----11 and half rules
+
+
+Relational---- Relation----- Table---- Row & Column(Cell)
+
+
+Codd's 12 rules
+---------------
+Rule 0: The Foundation Rule
+----------------------------
+Everything works around a Relation ie. Table and doesn't only have tables, but many more things.
+But Foundation is Table(Relation). 
+
+Rule 1: The Information Rule:
+-----------------------------
+Data -- Tables--- Logical
+Physical not important
+Values----Scalar--(Single)
+"Single value in a column of the row in the table"
+
+EmpData
+-------
+EmpNo---Ename---Sal----City
+101	Jim	30k	Pune
+102     Jack	30k	Mumbai
+103	Jack	30k	Bangalore
+
+		
+
+
+Rule 2: The Guaranteed Access Rule
+----------------------------------
+Datum-----accessible logically by resorting to table name ,column name and primary key.
+
+Unique value in each row which cannot be left empty.
+Removes ambiguity.(confusion)
+
+
+
+Primary key--- unique & not null
+
+
+
+Rule 3: Systematic Treatment of NULL values
+-------------------------------------------
+Null is Different from empty or blank. Nor it is a zero.
+
+
+comm--- not null
+EmpData
+-------
+EmpNo---Ename---Sal----City--------- -- Desig--------Comm
+101	Jim	30k	Pune		Mgr	     null(not applicable)
+102     Jack	30k	Mumbai		Salesman       0
+103	Jack	30k	Bangalore	Salesman     
+
+
+Rule 4: Dynamic Online Catalog Based on the Relational Model
+-------------------------------------------------------------
+Data Dictionary-----
+
+
+Rule 5: The Comprehensive Data Sublanguage Rule
+-----------------------------------------------
+SQL-- Structured Query Language---- adhered/supported by the database
+
+
+Rule 6: The View Updating Rule
+------------------------------
+View is a virtual table created on the table(relation) or some other view which doesn't hold any data but points to the correct data when needed.
+It is used as an abstraction level to the table.
+
+2 types of views---
+1) Simple 
+donot contains any joins,subqueries, group by etc. 
+Simple query defines the view.
+And as it a simple query the table underneath the view can be updated(edited/deleted/inserted), 
+so they are called UPDATE- ABLE VIEWS.
+	           =================== 
+
+
+2) Complex
+contains any joins,subqueries, group by etc. 
+Complex queries are used for that purpose.
+
+And as it a complex query the table underneath the view CANNOT be updated(edited/deleted/inserted), 
+so they are called NONUPDATE- ABLE VIEWS.
+		   =====================	
+
+
+
+
+Rule 7: Possible High Level Insert,Update and Delete
+--------------------------------------------------
+Insert , Update and Delete is possible on all tables/relations, but more control over insert,update,delete can be achieved using Merge.
+
+
+Rule 8: Physical Data Independence
+-----------------------------------
+Any structural changes to the database ---- change in the number/type/sequence of columns must not impact the Application using the database.
+
+
+Rule 9: Logical Data Independence
+---------------------------------
+The logical data in the database must be independent of the users view(application).
+Any  change in the logical data must not affect the application.
+For example, if u merge 2 tables or split a single table into 2 different table there should be not change required to be done to the application.
+
+
+
+Rule 10: Integrity Independence
+--------------------------------
+Integrity --- wholeness and correctness of data.
+Constraints------------limiting the input of the data in the column row.
+Types of Integrity:
+-----------------
+1) Entity Integrity----- Primary Key---- unique & not null
+2) Referential Integrity------references a primary of the same or different table----Foreign key
+	Emp--- Empno(pk)				Dept----- Deptno(pk)
+===========================       		=========================
+Empno	Ename 	Deptno----(fk)	Desig	  	  Deptno Dname Loc
+1       Hari	10		Training	   10	   A	A1
+	   					   20	   B    B1
+					           30	   C	C1
+						   40	   D	D1	
+
+
+3) Check -----check price>0 and price>0 and price<1000
+4) Default-----default "Training"
+5) Not null-----
+
+
+
+
+Rule 11: Distribution Independence
+----------------------------------
+even if your data is distributed over different locations on different servers the end user
+The end user must not be known Data is distributed, he should be getting the impression that data is 
+at a single site only.
+
+
+Rule 12: The Non Subversion Rule
+----------------------------------
+Datum security it has related to constraints etc, the user must not be able to bypass the security and access the data.
+
+
+
+
+
