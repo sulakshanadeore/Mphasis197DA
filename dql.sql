@@ -35,6 +35,14 @@ where categoryid=1
 order by supplierid,ProductName
 
 
+select orderid,sum(unitprice*	quantity) "OrderTotal" from [Order Details]
+where orderid=10403
+group by OrderID
+having sum(unitprice*quantity)>1000
+order by "OrderTotal"
+
+
+
 select productid,supplierid,productname,UnitPrice from products
 where categoryid=1
 order by supplierid,ProductName
