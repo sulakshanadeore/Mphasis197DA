@@ -1,0 +1,58 @@
+use pubs
+go
+
+
+select state from authors
+intersect
+select state from stores
+
+select distinct(state) from stores
+
+--Find authors info who stay in the same state as that of stores  are located
+select * from authors
+where state in (select state from stores)
+
+use Northwind
+go
+select productid,productname,categoryid from products
+
+select * from Employees
+
+select * from employees
+where HireDate like '1993-10-17'
+
+select * from employees 
+where convert(datetime2,hiredate) =  '1993-10-17 00:00:00.0000000'
+----find all employees who joined on the same date as Steven joined
+
+select hiredate from employees
+where FirstName='Steven'
+
+select * from employees 
+where convert(date,hiredate) =(select hiredate from employees
+where FirstName='Steven')
+
+select DATEPART(hour,getdate())
+select DATEPART(month,getdate())
+select DATEPART(MONTH,getdate())
+select DATEPART(YEAR,getdate())
+select DATEPART(DAY,getdate())
+select DATEPART(WEEK,getdate())
+select DATEPART(DAYOFYEAR,getdate())
+select DATEPART(WEEKDAY,getdate())
+
+select DATEADD(month,2,getdate())
+select DATEADD(month,-2,getdate())
+
+use northwind
+go
+select firstname,DATEDIFF(month,hiredate,getdate()) from Employees
+select firstname,hiredate,DATEDIFF(YEAR,hiredate,getdate()) from Employees
+
+select DATENAME(DAY,getdate()),DATENAME(MONTH,getdate()),DATENAME(YEAR,getdate())
+
+
+
+
+
+
