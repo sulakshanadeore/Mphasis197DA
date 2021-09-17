@@ -52,6 +52,95 @@ select firstname,hiredate,DATEDIFF(YEAR,hiredate,getdate()) from Employees
 select DATENAME(DAY,getdate()),DATENAME(MONTH,getdate()),DATENAME(YEAR,getdate())
 
 
+select supp.supplierid,supp.CompanyName from
+ (select supplierid,companyname from suppliers) as supp
+ order by supp.SupplierID
+
+use pubs
+go
+
+select a.au_ord, a.title_id,t.title_id,t.title  from
+(select title_id,title,type,pub_id from titles) as t
+ join titleauthor as a
+on t.title_id=a.title_id
+
+select myT.title_id from (select a.title_id, type,pub_id
+						 from titles as t1  join titleauthor  as a )
+						 							as myT inner join titleauthor 
+on myT.title_id=titleauthor.title_id
+select * from titles
+
+select title_id,title,type,price,averageprice.pub_id, averageprice.p, price-averageprice.p "totalPrice" from
+(select pub_id,AVG(price) p from titles
+group by pub_id) as averageprice inner join titles 
+on type='business' and titles.pub_id in(1389,0736)
+
+select title_id,title,type,price,(select AVG(price) p from titles) as averageprice,
+price-(select AVG(price) p from titles) as diff from titles 
+where type='business'
+
+
+
+
+
+select * from titles
+
+
+select pub_id from titles
+where type='business'
+
+
+select min(price) from titles
+
+select * from titles
+where price > any(select price from titles)  ---min
+order by price
+
+select max(price) from titles
+
+select * from titles
+where price > any(select max(price) from titles)  ---min
+order by price
+
+
+use northwind
+go
+
+select sum(quantity) from [order details]
+where productid=77
+
+select * from products
+
+select * from products 
+where  ProductID= any (select productid from [Order Details] where Quantity>=10)
+order by ProductID
+
+
+select * from products 
+where  ProductID< all (select productid from [Order Details] where Quantity=10)
+order by ProductID
+
+select avg(unitprice) from products
+group by CategoryID
+
+select ProductID,UnitPrice from products
+where unitprice > all (select avg(unitprice) from products
+group by CategoryID)
+order by UnitPrice
+
+select count(*) from Products
+where categoryid=1
+
+
+select * from products
+where categoryid=2 and not exists(select count(*) from Products
+where categoryid=1
+having count(*)>13)
+
+
+
+
+
 
 
 
