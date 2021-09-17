@@ -53,3 +53,9 @@ on p.CategoryID=c.CategoryID
 select productid,productname,p.categoryid,categoryname 
 from Categories c  full outer join products p
 on p.CategoryID=c.CategoryID
+
+
+--Self join
+select emp.employeeid,emp.firstname,emp.reportsto "Mgrid", mgr.firstname "MgrName"
+ from employees emp  join employees mgr
+ on emp.ReportsTo=mgr.EmployeeID
