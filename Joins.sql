@@ -59,3 +59,54 @@ on p.CategoryID=c.CategoryID
 select emp.employeeid,emp.firstname,emp.reportsto "Mgrid", mgr.firstname "MgrName"
  from employees emp  join employees mgr
  on emp.ReportsTo=mgr.EmployeeID
+------------------------------------------------------------------------------------------------------
+
+union----------------------------all rows but no duplicates
+union all-----------------------------all rows with duplicates
+intersect -------- common rows between the queries
+minus------ rows there in the first result but not in the second
+
+
+use Northwind
+go
+
+select 69+29
+
+select 92+29
+select distinct(city) from customers
+select distinct(city) from suppliers
+
+----distinct
+select City from Customers
+union 
+select city from Suppliers
+
+
+
+select City from Customers
+union all
+select city from Suppliers
+
+select distinct(city) from Employees
+select distinct(city) from suppliers
+
+
+select city from Employees
+union all
+select city from Suppliers
+
+
+
+select city from Employees
+intersect
+select city from Suppliers
+
+
+select city from Employees
+except
+select city from Suppliers
+
+
+select city from Suppliers
+except
+select city from Employees
