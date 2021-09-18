@@ -1,0 +1,108 @@
+--3 types 
+--1. DDL--- Logon/logoff
+--2.DML trigger--- insert,update
+--3.Instead of Trigger
+
+---Delete----- before --- olddata ---historytable
+
+create trigger trig_insteadofDeleteDemo
+on categories
+instead of delete
+as 
+begin
+select 'instead of trigger fired when delete was issued' as message
+end;
+
+
+select * from Categories
+delete from Categories
+where CategoryID=11
+
+
+disable trigger trig_cat on categories
+enable trigger trig_cat on categories
+disable trigger all on categories
+enable trigger all on categories
+
+drop trigger trig_cat
+drop procedure name
+drop table tablename
+
+
+alter trigger trig_Cat_Insert
+on categories
+for insert 
+as 
+declare
+@catid int,
+@catname nvarchar(15),
+@actionName varchar(100),
+@cnt int
+begin
+select @catname=i.CategoryName from inserted i;
+if  len(@catname)>0
+begin
+set @actionName='Category Name Inserted';
+print @actionName
+select @cnt=count(*) from Categories
+print 'Now the rows are  ' +  convert(varchar(2),@cnt);
+
+end
+end
+
+select * from Categories
+insert into Categories(CategoryName,Description) values ('AddingNewCat','something')
+--------------------------------------------------------------------------------------------------
+
+--Triggers
+
+--Basic Blocks
+--Named Blocks-- functions and stored procedures
+--Called atomatic---- auto invokation
+
+alter trigger trig_cat
+on categories
+for update 
+as 
+declare
+@catid int,
+@catname nvarchar(15),
+@actionName varchar(100)
+begin
+select @catid=i.CategoryID from inserted i;
+select @catname=i.CategoryName from inserted i;
+
+if  len(@catname)>0
+begin
+set @actionName='Category Name updated';
+print @actionName
+end
+
+if @catid!=0
+begin
+set @actionName='Category ID ' + convert(varchar,@catid) + ' updated successfully' ; 
+print @actionName
+end
+
+end
+
+
+select * from Categories
+update Categories
+set CategoryName='New Value'
+where CategoryID=11
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
