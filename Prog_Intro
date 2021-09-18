@@ -1,0 +1,58 @@
+use northwind
+go
+--declare
+--@v_cnt int;
+--begin
+--set @v_cnt=10;
+--print @v_cnt
+
+--end;
+
+---------------------------------------------
+
+--declare
+--@v_cnt int;
+--begin
+--set @v_cnt=109;
+
+--if(@v_cnt=10)
+--begin
+--print 'Cnt is equal to 10'
+--end
+--else
+--begin
+--print 'Cnt is not equal to 10'
+--end
+--end;
+
+
+
+--declare
+--@i int, @j int,@k int;
+--begin
+--set @i=10;
+--set @j=207;
+--set @k=@i+@j;
+--print @k
+--end;
+
+
+--declare
+--@v_empid int,
+--@v_fname nvarchar(10),
+--@v_lname nvarchar(20);
+--begin
+--set @v_empid=1;
+--select  @v_lname=Lastname,@v_fname=FirstName
+-- from employees
+--where employeeid=@v_empid;
+--print @v_fname;
+--print @v_lname;
+
+--end;
+
+
+
+
+
+
