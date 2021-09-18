@@ -1,0 +1,33 @@
+--Stored Procedures-- are compiled programs which are ready to use once created.
+--They can be reused any number of times.
+
+--They accept parameters--- but they are not compulsory.
+--Parameters can be one or many.
+
+
+--types of parameters
+
+--1) Input----- take/accept input ----default parameter type
+--2) Output---- send the calculated output to the program who calls it(Stored Procedure)
+
+create procedure sp_user_add
+(@no1 int,
+@no2 int)
+as
+begin
+declare @ans int;
+set @ans=@no1+@no2;
+print @ans;
+end;
+
+execute sp_user_add 10,20
+
+
+create procedure sp_user_addWithOutParameter
+(@no1 int,
+@no2 int,
+@ans int output)
+as
+begin
+set @ans=@no1+@no2;
+end;
