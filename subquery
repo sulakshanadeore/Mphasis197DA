@@ -137,7 +137,51 @@ where categoryid=2 and not exists(select count(*) from Products
 where categoryid=1
 having count(*)>13)
 
+--Ctrl+K +C ---- Comment
+--Ctrl+K +U ---- UnComment
 
+
+--Co-related sub query
+
+
+--select------- from
+--where ----- (select  outer.column
+
+
+
+--if inner value is used in outer query--- sub query
+--but if  outerquery value is used in inner query----- co-related sub query
+
+--select inner.column 
+--where (inner)
+
+
+use pubs
+go
+
+
+
+select a.au_fname,a.au_lname from authors a
+where 100 in(select t.royaltyper from titleauthor t
+	 where t.au_id=a.au_id)
+
+----if the outer query returns 20 rows -- 
+--the sub query will execute once for each row returned by the outer query.
+
+
+select * from authors
+
+172-32-1176---authors
+
+	 select * from titleauthor
+	 where royaltyper=100
+
+
+	 create view v1
+	 as 
+	 (query)
+
+select * from v1
 
 
 
