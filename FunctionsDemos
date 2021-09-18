@@ -1,0 +1,36 @@
+CREATE FUNCTION fn_user_CalculateOrderValue
+(
+	-- Add the parameters for the function here
+	@p_orderid int
+)
+RETURNS money
+AS
+BEGIN
+	-- Declare the return variable here
+	DECLARE 
+	 @orderamt money,
+	     @dis int
+
+	-- Add the T-SQL statements to compute the return value here
+	select @dis=Discount from [Order Details] where OrderID=@p_orderid;
+
+	select @dis= (sum(unitprice*quantity) * @dis) from [Order Details] where OrderID=@p_orderid;
+	select @orderamt=sum(unitprice*quantity) 	from [Order Details]
+where orderid=@p_orderid;
+set @orderamt=@orderamt-@dis;
+
+
+
+
+	-- Return the result of the function
+	RETURN @orderamt;
+
+END
+GO
+
+declare
+@a money
+begin
+select @a=[dbo].fn_user_CalculateOrderValue(10251)
+print @a
+end
