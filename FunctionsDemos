@@ -34,3 +34,50 @@ begin
 select @a=[dbo].fn_user_CalculateOrderValue(10251)
 print @a
 end
+------------------------------------------------------
+
+
+CREATE FUNCTION fn_user_OrderDetails
+(	
+	-- Add the parameters for the function here
+	@p_orderid int
+)
+RETURNS TABLE 
+AS
+RETURN 
+(
+	-- Add the SELECT statement with parameter references here
+	SELECT * from [Order Details] where OrderID=@p_orderid
+)
+GO
+
+select * from fn_user_OrderDetails(10248)
+
+
+---------------------------------------------------------------------------
+
+CREATE FUNCTION fn_user_tbl_OrderDetails
+(
+	-- Add the parameters for the function here
+	@p_orderid int
+)
+RETURNS @ord_Details Table
+(
+	-- Add the column definitions for the TABLE variable here
+	ordid int,
+	prodid int,
+	price money,
+	qty int,
+	dis int
+)
+AS
+BEGIN
+	-- Fill the table variable with the rows for your result set
+	insert into @ord_Details SELECT * from [Order Details] where OrderID=@p_orderid
+	RETURN 
+END
+GO
+
+
+
+select * from fn_user_tbl_OrderDetails(10248)
