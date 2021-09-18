@@ -81,3 +81,26 @@ GO
 
 
 select * from fn_user_tbl_OrderDetails(10248)
+--------------------------------------------------------------
+Default parameter
+-----------------
+
+ALTER procedure [dbo].[sp_user_add]
+(@no1 int=1,
+@no2 int)
+as
+begin
+declare @ans int;
+set @ans=@no1+@no2;
+print @ans;
+end;
+
+
+
+declare
+@no1 int,
+@no2 int
+begin
+set @no2=20
+execute  [dbo].[sp_user_add]   default,@no2
+end
