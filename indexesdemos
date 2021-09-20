@@ -1,0 +1,119 @@
+sp_help authors
+
+
+create table publication_house
+(
+pubid int,
+pubname varchar(20),
+city varchar(20)
+)
+
+sp_help publication_house
+
+
+---Non clustered
+create index pub_house
+on publication_house(pubid)
+
+
+drop index  publication_house.pub_house
+
+alter table publication_house
+alter column pubid  int  NOT NULL
+
+
+----clustered unique
+alter table publication_house
+add primary key (pubid)
+
+--Only 1 clustered index per table
+--And any number of non-clustered index can be there on the table.
+
+---Limits of non-clustered index version wise
+-----2008
+----2012
+----2014
+
+
+drop  index publication_house.PK__publicat__6BA698E556D4C628
+
+
+alter table publication_house
+drop constraint PK__publicat__6BA698E556D4C628
+
+create clustered index pk_pubid
+on publication_house(pubid)
+
+
+create unique index ind_uni
+on publication_house(pubname)
+
+
+alter table publication_house
+add state varchar(30)
+
+--composite-index---- non clustered
+create index ind_comp_city_state
+on publication_house(city,state)
+
+
+use PublishingCompany
+go
+
+
+create table t1
+(auid int,
+auname varchar(50))
+
+insert into t1
+select au_id,au_name from authors
+
+
+select * from t1
+where auid=1
+
+
+
+
+select * from t1
+where auid=1
+
+
+
+
+sp_help t1
+
+
+-----------------------------
+use pubs
+go
+
+sp_help authors
+
+select * from authors
+
+
+select * from authors
+where au_lname like 'Locksley'
+
+
+select * from authors
+where au_id='274-80-9391'
+
+select * from titleauthor
+
+select * from titleauthor
+where au_id like '267-41-2394' and title_id like 'TC7777'
+
+select * from titles
+where pub_id=1389
+
+select * from titles
+where title_id='BU1111'
+
+
+
+
+
+
+
